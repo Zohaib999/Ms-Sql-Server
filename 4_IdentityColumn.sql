@@ -32,10 +32,14 @@ select * from tblEmployee
 
 Insert into tblEmployee values('sam',2,32,'sam@s','10-2-20','10-2-20')
 
+
+-- for this we have to specify the Identity Insert on 
 --if we insert the value with speicification of
 -- the id then we should have to turn the indentity 
 -- off first otherwise it will cause error
+
 set identity_insert tblEmployee ON
+
 
 -- Now we also have to specifie the tblName(columnName)
 insert into tblEmployee([Name],Gender,Age,Email,[Start_date],[End_date],Id)
@@ -57,8 +61,42 @@ set identity_insert tblEmployee OFf
 select * from tblGender
 
 -- For checking the last_identity value
-select SCOPE_IDENTITY()
-select @@IDENTITY
+
+select SCOPE_IDENTITY() --return the current session/scope value
+
+select @@IDENTITY    --return the current session of any scope value
+
+-- Q:
+	-- If the Indentity Column reachs to the 100 values and then a the 
+	--  values get deleted then it the next vaues are start from the 
+	--   101 vlaues 
+
+-- A:
+	-- The solution is to reset the identity column
+
+use sqlparactice
+select * from tblEmployee
+
+-- Deleting some data
+Delete from tblEmployee where id=7
+
+-- now if we insert some data  it will start from next
+-- so we can reset Identity
+
+DBCC CHECKIDENT(tblEmployee, RESEED, 20)
+
+-- Now Id will start from 21
+insert into tblEmployee values('ss',2,30,'s@S','2000-10-02',
+'2000-10-02')
+
+
+-- We can check the last value in the IDENTITy Column
+--   by this command 
+
+select IDENT_CURRENT('tblEmployee') 
+--return the any session/scope value
+
+
 
 
 
