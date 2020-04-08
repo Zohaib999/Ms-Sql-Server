@@ -43,6 +43,7 @@ set identity_insert tblEmployee ON
 
 -- Now we also have to specifie the tblName(columnName)
 insert into tblEmployee([Name],Gender,Age,Email,[Start_date],[End_date],Id)
+
 values('sam',2,32,'sam@s','10-2-20','10-2-20',3)
 insert into tblEmployee([Name],Gender,Age,Email,[Start_date],[End_date],Id)
 values('sam',2,32,'sam@s','10-2-20','10-2-20',4)
